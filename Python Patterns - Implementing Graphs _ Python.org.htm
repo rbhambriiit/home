@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>   <html class="no-js ie6 lt-ie7 lt-ie8 lt-ie9">   <![endif]-->
+<!--[if IE 7]>      <html class="no-js ie7 lt-ie8 lt-ie9">          <![endif]-->
+<!--[if IE 8]>      <html class="no-js ie8 lt-ie9">                 <![endif]-->
+<!--[if gt IE 8]><!-->
+<html style="" class="js no-touch geolocation fontface generatedcontent svg formvalidation placeholder boxsizing no-retina" dir="ltr" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="prefetch" href="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/jquery.js">
+
+    <meta name="application-name" content="Python.org">
+    <meta name="msapplication-tooltip" content="The official home of the Python Programming Language">
+    <meta name="apple-mobile-web-app-title" content="Python.org">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="imagetoolbar" content="false">
+
+    <script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/widgets.js" id="twitter-wjs"></script><script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/ga.js" async="" type="text/javascript"></script><script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/modernizr.js"></script>
+
+    <link href="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/style.css" rel="stylesheet" type="text/css" title="default">
+    <link href="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/mq.css" rel="stylesheet" type="text/css" media="not print, braille, embossed, speech, tty">
+    
+
+    <!--[if (lte IE 8)&(!IEMobile)]>
+    <link href="/static/stylesheets/no-mq.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    
+    <![endif]-->
+
+    
+    <link rel="icon" type="image/x-icon" href="https://www.python.org/static/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.python.org/static/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.python.org/static/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.python.org/static/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="https://www.python.org/static/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" href="https://www.python.org/static/apple-touch-icon-precomposed.png">
+
+    
+    <meta name="msapplication-TileImage" content="/static/metro-icon-144x144-precomposed.png"><!-- white shape -->
+    <meta name="msapplication-TileColor" content="#3673a5"><!-- python blue -->
+    <meta name="msapplication-navbutton-color" content="#3673a5">
+
+    <title>Python Patterns - Implementing Graphs | Python.org</title>
+
+    <meta name="description" content="The official home of the Python Programming Language">
+    <meta name="keywords" content="Python programming language object oriented web free open source software license documentation download community">
+
+    
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Python.org">
+    <meta property="og:title" content="Welcome to Python.org">
+    <meta property="og:description" content="The official home of the Python Programming Language">
+    
+    <meta property="og:image" content="https://www.python.org/static/opengraph-icon-200x200.png">
+    <meta property="og:image:secure_url" content="https://www.python.org/static/opengraph-icon-200x200.png">
+    
+    <meta property="og:url" content="https://www.python.org/doc/essays/graphs/">
+
+    <link rel="author" href="https://www.python.org/static/humans.txt">
+
+    
+
+    
+    <script type="application/ld+json">
+     {
+       "@context": "http://schema.org",
+       "@type": "WebSite",
+       "url": "https://www.python.org/",
+       "potentialAction": {
+         "@type": "SearchAction",
+         "target": "https://www.python.org/search/?q={search_term_string}",
+         "query-input": "required name=search_term_string"
+       }
+     }
+    </script>
+
+    
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39055973-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    
+<script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/timeline.js" async="" charset="utf-8" type="text/javascript"></script></head>
+
+<body class="python pages default-page">
+
+    <div id="touchnav-wrapper">
+
+        <div id="nojs" class="do-not-print">
+            <p><strong>Notice:</strong> While Javascript is not 
+essential for this website, your interaction with the content will be 
+limited. Please turn Javascript on for the full experience. </p>
+        </div>
+
+        <!--[if lt IE 8]>
+        <div id="oldie-warning" class="do-not-print">
+            <p><strong>Notice:</strong> Your browser is <em>ancient</em> and <a href="http://www.ie6countdown.com/">Microsoft agrees</a>. <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience a better web.</p>
+        </div>
+        <![endif]-->
+
+        <!-- Sister Site Links -->
+        <div id="top" class="top-bar do-not-print">
+
+            <nav class="meta-navigation container" role="navigation">
+
+                
+                <div class="skip-link screen-reader-text">
+                    <a href="#content" title="Skip to content">Skip to content</a>
+                </div>
+
+                
+                <a id="close-python-network" class="jump-link" href="#python-network" aria-hidden="true">
+                    <span aria-hidden="true" class="icon-arrow-down"><span>▼</span></span> Close
+                </a>
+
+                
+
+<ul class="menu" role="tree">
+    
+    <li class="python-meta ">
+        <a href="https://www.python.org/" title="The Python Programming Language">Python</a>
+    </li>
+    
+    <li class="psf-meta ">
+        <a href="https://www.python.org/psf-landing/" title="The Python Software Foundation">PSF</a>
+    </li>
+    
+    <li class="docs-meta ">
+        <a href="https://docs.python.org/" title="Python Documentation">Docs</a>
+    </li>
+    
+    <li class="pypi-meta ">
+        <a href="https://pypi.python.org/" title="Python Package Index">PyPI</a>
+    </li>
+    
+    <li class="jobs-meta ">
+        <a href="https://www.python.org/jobs/" title="Python Job Board">Jobs</a>
+    </li>
+    
+    <li class="shop-meta ">
+        <a href="https://www.python.org/community/" title="Python Community">Community</a>
+    </li>
+    
+</ul>
+
+
+                <a id="python-network" class="jump-link" href="#top" aria-hidden="true">
+                    <span aria-hidden="true" class="icon-arrow-up"><span>▲</span></span> The Python Network
+                </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Header elements -->
+        <header class="main-header" role="banner">
+            <div class="container">
+
+                <h1 class="site-headline">
+                    <a href="https://www.python.org/"><img class="python-logo" src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/python-logo.png" alt="python™"></a>
+                </h1>
+
+                <div class="options-bar do-not-print">
+
+                    
+                    <a id="site-map-link" class="jump-to-menu" href="#site-map"><span class="menu-icon">≡</span> Menu</a><form class="search-the-site" action="/search/" method="get">
+                        <fieldset title="Search Python.org">
+
+                            <span aria-hidden="true" class="icon-search"></span>
+
+                            <label class="screen-reader-text" for="id-search-field">Search This Site</label>
+                            <input id="id-search-field" name="q" role="textbox" class="search-field placeholder" placeholder="Search" value="Search" tabindex="1" type="search">
+
+                            <button type="submit" name="submit" id="submit" class="search-button" title="Submit this Search" tabindex="3">
+                                GO
+                            </button>
+
+                            
+                            <!--[if IE]><input type="text" style="display: none;" disabled="disabled" size="1" tabindex="4"><![endif]-->
+
+                        </fieldset>
+                    </form><span class="breaker"></span><div class="adjust-font-size" aria-hidden="true">
+                        <ul class="navigation menu" aria-label="Adjust Text Size on Page">
+                            <li class="tier-1 last" aria-haspopup="true">
+                                <a href="#" class="action-trigger"><strong><small>A</small> A</strong></a>
+                                <ul class="subnav menu">
+                                    <li class="tier-2 element-1" role="treeitem"><a class="text-shrink" title="Make Text Smaller" href="javascript:;">Smaller</a></li>
+                                    <li class="tier-2 element-2" role="treeitem"><a class="text-grow" title="Make Text Larger" href="javascript:;">Larger</a></li>
+                                    <li class="tier-2 element-3" role="treeitem"><a class="text-reset" title="Reset any font size changes I have made" href="javascript:;">Reset</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><div class="winkwink-nudgenudge">
+                        <ul class="navigation menu" aria-label="Social Media Navigation">
+                            <li class="tier-1 last" aria-haspopup="true">
+                                <a href="#" class="action-trigger">Socialize</a>
+                                <ul class="subnav menu">
+                                    <li class="tier-2 element-1" role="treeitem"><a href="http://plus.google.com/+Python"><span aria-hidden="true" class="icon-google-plus"></span>Google+</a></li>
+                                    <li class="tier-2 element-2" role="treeitem"><a href="http://www.facebook.com/pythonlang?fref=ts"><span aria-hidden="true" class="icon-facebook"></span>Facebook</a></li>
+                                    <li class="tier-2 element-3" role="treeitem"><a href="http://twitter.com/ThePSF"><span aria-hidden="true" class="icon-twitter"></span>Twitter</a></li>
+                                    <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/community/irc/"><span aria-hidden="true" class="icon-freenode"></span>Chat on IRC</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><div class="account-signin">
+                        <ul class="navigation menu" aria-label="Social Media Navigation">
+                            <li class="tier-1 last" aria-haspopup="true">
+                                
+                                <a href="https://www.python.org/accounts/login/" title="Sign Up or Sign In to Python.org">Sign In</a>
+                                <ul class="subnav menu">
+                                    <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/accounts/signup/">Sign Up / Register</a></li>
+                                    <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/accounts/login/">Sign In</a></li>
+                                </ul>
+                                
+                            </li>
+                        </ul>
+                    </div>
+
+                </div><!-- end options-bar -->
+
+                <nav id="mainnav" class="python-navigation main-navigation do-not-print" role="navigation">
+                    
+                        
+<ul class="navigation menu" role="menubar" aria-label="Main Navigation">
+  
+    
+    
+    <li id="about" class="tier-1 element-1   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/about/" title="" class="">About</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/about/apps/" title="">Applications</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/about/quotes/" title="">Quotes</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/about/gettingstarted/" title="">Getting Started</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/about/help/" title="">Help</a></li>
+    
+
+                            <li class="tier-2 super-navigation">
+                                <h4>Python is a programming language that lets you work more quickly and integrate your systems more effectively.</h4>
+                                <p>You can learn to use Python and see almost immediate gains in productivity and lower maintenance costs.  <a href="https://www.python.org/about">Learn more about Python.</a>.
+                            </p></li></ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="downloads" class="tier-1 element-2   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/downloads/" title="" class="">Downloads</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/downloads/" title="">All releases</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/downloads/source/" title="">Source code</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/downloads/windows/" title="">Windows</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/downloads/mac-osx/" title="">Mac OS X</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/download/other/" title="">Other Platforms</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://docs.python.org/3/license.html" title="">License</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/download/alternatives" title="">Alternative Implementations</a></li>
+    
+<!-- download supernav from templates/downloads/supernav.html -->
+<li class="tier-2 super-navigation">
+    
+    <div class="download-os-mac-osx" style="display: none;">
+        
+        <h4>Download for Mac OS X</h4>
+        
+        <p>
+            <a class="button" href="https://www.python.org/ftp/python/3.5.0/python-3.5.0-macosx10.6.pkg">Python 3.5.0</a>
+            <a class="button" href="https://www.python.org/ftp/python/2.7.10/python-2.7.10-macosx10.6.pkg">Python 2.7.10</a>
+        </p>
+        <p>Not the OS you are looking for? Python can be used on 21 different operating systems and environments. <a href="https://www.python.org/downloads/">View the full list</a>.</p>
+    </div>
+    
+    <div class="download-os-source" style="display: none;">
+        
+        <h3>Python Source</h3>
+        
+        <p>
+            <a class="button" href="https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz">Python 3.5.0</a>
+            <a class="button" href="https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tar.xz">Python 2.7.10</a>
+        </p>
+        <p>Not the OS you are looking for? Python can be used on 21 different operating systems and environments. <a href="https://www.python.org/downloads/">View the full list</a>.</p>
+    </div>
+    
+    <div class="download-os-windows" style="">
+        
+        <h4>Download for Windows</h4>
+        
+        <p>
+            <a class="button" href="https://www.python.org/ftp/python/3.5.0/python-3.5.0-webinstall.exe">Python 3.5.0</a>
+            <a class="button" href="https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi">Python 2.7.10</a>
+        </p>
+        <p>Not the OS you are looking for? Python can be used on 21 different operating systems and environments. <a href="https://www.python.org/downloads/">View the full list</a>.</p>
+    </div>
+    
+    <div style="display: none;" class="download-unknown">
+        <h4>Download Python for Any OS</h4>
+        <p>Python can be used on 21 different operating systems and environments.</p>
+        <p>
+            <a class="button" href="https://www.python.org/downloads/operating-systems/">View the Full List</a>
+        </p>
+    </div>
+</li>
+</ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="documentation" class="tier-1 element-3   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/doc/" title="" class="">Documentation</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/doc/" title="">Docs</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/doc/av" title="">Audio/Visual Talks</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://wiki.python.org/moin/BeginnersGuide" title="">Beginner's Guide</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://docs.python.org/devguide/" title="">Developer's Guide</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://docs.python.org/faq/" title="">FAQ</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="http://wiki.python.org/moin/Languages" title="">Non-English Docs</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="http://python.org/dev/peps/" title="">PEP Index</a></li>
+    
+        <li class="tier-2 element-8" role="treeitem"><a href="https://wiki.python.org/moin/PythonBooks" title="">Python Books</a></li>
+    
+                            <li class="tier-2 super-navigation">
+                                <h4>Python’s standard documentation: download, browse or watch a tutorial.</h4>
+                                <p>Get started below, or visit the <a href="https://www.python.org/doc/versions/">Documentation page to browse by version</a>. </p>
+                                <p class="download-buttons">
+                                    <a class="button" href="http://docs.python.org/3/">Python 3.x Docs</a> 
+                                    <a class="button" href="http://docs.python.org/2/">Python 2.x Docs</a>
+                                </p>
+                                <p>See also <a href="https://wiki.python.org/moin/Python2orPython3">Should I use Python 2 or 3</a>? </p>
+                            </li></ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="community" class="tier-1 element-4   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/community/" title="" class="">Community</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/community/diversity/" title="">Diversity</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/community/irc/" title="">IRC</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/community/lists/" title="">Mailing Lists</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/community/workshops/" title="">Python Conferences</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/community/sigs/" title="">Special Interest Groups</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://wiki.python.org/moin/" title="">Python Wiki</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/community/logos/" title="">Python Logo</a></li>
+    
+        <li class="tier-2 element-8" role="treeitem"><a href="https://www.python.org/community/merchandise/" title="">Merchandise</a></li>
+    
+        <li class="tier-2 element-9" role="treeitem"><a href="https://www.python.org/community/awards" title="">Community Awards</a></li>
+    
+                            <li class="tier-2 super-navigation">
+                                <h4>The Python Community</h4>
+<p>Great software is supported by great people. Our user base is 
+enthusiastic, dedicated to encouraging use of the language, and 
+committed to being diverse and friendly.</p>
+
+<!--
+                                <p>Here are some events and groups in your area.</p>
+                                <ul class="menu">
+                                    <li><time datetime="">9/30<span class="say-no-more">/2012</span></time> <a href="#">Royal Python Society Meetup, Providence RI</a></li>
+                                    <li><time datetime="">10/4<span class="say-no-more">/2012</span></time> <a href="#">Python Users Group, Boston MA</a></li>
+                                    <li><time datetime="">10/5<span class="say-no-more">/2012</span></time> <a href="#">Python Enthusiasts, Cambridge MA</a></li>
+                            </ul>
+                            </li>--></li></ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="success-stories" class="tier-1 element-5   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/about/success/" title="success-stories" class="">Success Stories</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/about/success/#arts" title="">Arts</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/about/success/#business" title="">Business</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/about/success/#education" title="">Education</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/about/success/#engineering" title="">Engineering</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/about/success/#government" title="">Government</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://www.python.org/about/success/#scientific" title="">Scientific</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/about/success/#software-development" title="">Software Development</a></li>
+    
+<!-- successstories supernav from templates/successstories/supernav.html -->
+       <li class="tier-2 super-navigation">
+            
+            <img src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/Lucasfilm_logo.png" alt="Industrial Light &amp; Magic">
+            
+            <blockquote class="success-quote">
+                ILM runs a batch processing environment capable of 
+modeling, rendering and compositing tens of thousands of motion picture 
+frames per day. Thousands of machines running Linux, IRIX, Compaq Tru64,
+ OS X, Solaris, and Windows join together to provide a production 
+pipeline used by ~800 users daily. Speed of development is key, and 
+Python was a faster way to code (and re-code) the programs that control 
+this production pipeline.
+            </blockquote>
+            <p class="quote-by"><cite>Tim Fortenberry</cite>, <a href="http://www.ilm.com/">Industrial Light &amp; Magic</a></p>
+
+        </li></ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="news" class="tier-1 element-6  " aria-haspopup="true">
+        <a href="https://www.python.org/blogs/" title="News from around the Python world" class="">News</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/blogs/" title="Python Insider Blog Posts">Python News</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="http://planetpython.org/" title="Planet Python">Community News</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="http://pyfound.blogspot.com/" title="PSF Blog">PSF News</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="http://pycon.blogspot.com/" title="PyCon Blog">PyCon News</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    
+    
+    <li id="events" class="tier-1 element-7   with-supernav" aria-haspopup="true">
+        <a href="https://www.python.org/events/" title="" class="">Events</a>
+        
+            
+
+<ul class="subnav menu" role="menu" aria-hidden="true">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/events/python-events/" title="">Python Events</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/events/python-user-group/" title="">User Group Events</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/events/python-events/past/" title="">Python Events Archive</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/events/python-user-group/past/" title="">User Group Events Archive</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://wiki.python.org/moin/PythonEventsCalendar#Submitting_an_Event" title="">Submit an Event</a></li>
+    
+<li class="tier-2 super-navigation">Find events from the Python Community around the world!</li></ul>
+
+        
+    </li>
+    
+    
+    
+    
+  
+</ul>
+
+                    
+                </nav>
+
+                <div class="header-banner "> <!-- for optional "do-not-print" class -->
+                    
+                    
+                </div>
+
+                
+                
+
+             </div><!-- end .container -->
+        </header>
+
+        <div id="content" class="content-wrapper">
+            <!-- Main Content Column -->
+            <div class="container">
+
+                <section class="main-content with-left-sidebar" role="main">
+
+                    
+
+
+<ul class="breadcrumbs menu">
+	
+</ul>
+
+
+
+                    
+    
+    <article class="text">
+        
+
+        <header class="article-header">
+            <h1 class="page-title">Python Patterns - Implementing Graphs</h1>
+        </header>
+        
+        <h1>Python Patterns - Implementing Graphs</h1>
+
+<hr>
+
+<i>Change notes: 2/22/98, 3/2/98, 12/4/00: This version of this essay
+fixes several bugs in the code.</i>
+
+<pre>Copyright (c) 1998, 2000, 2003 Python Software Foundation.
+All rights reserved.
+Licensed under the PSF license.
+</pre>
+
+<hr>
+
+Graphs are networks consisting of nodes connected by edges or arcs.  In 
+directed graphs, the connections between nodes have a direction, and are 
+called arcs; in undirected graphs, the connections have no direction and 
+are called edges.  We mainly discuss directed graphs.  Algorithms in graphs 
+include finding a path between two nodes, finding the shortest path between 
+two nodes, determining cycles in the graph (a cycle is a non-empty path 
+from a node to itself), finding a path that reaches all nodes (the famous 
+"traveling salesman problem"), and so on.  Sometimes the nodes or arcs of a 
+graph have weights or costs associated with them, and we are interested in 
+finding the cheapest path.<p>
+
+There's considerable literature on graph algorithms, which are an important 
+part of discrete mathematics.  Graphs also have much practical use in 
+computer algorithms.  Obvious examples can be found in the management of 
+networks, but examples abound in many other areas.  For instance, 
+caller-callee relationships in a computer program can be seen as a graph 
+(where cycles indicate recursion, and unreachable nodes represent dead 
+code).</p><p>
+
+Few programming languages provide direct support for graphs as a data type, 
+and Python is no exception.  However, graphs are easily built out of lists 
+and dictionaries.  For instance, here's a simple graph (I can't use 
+drawings in these columns, so I write down the graph's arcs):
+
+</p><pre>    A -&gt; B
+    A -&gt; C
+    B -&gt; C
+    B -&gt; D
+    C -&gt; D
+    D -&gt; C
+    E -&gt; F
+    F -&gt; C
+</pre>
+
+This graph has six nodes (A-F) and eight arcs.  It can be represented by 
+the following Python data structure:
+
+<pre>    graph = {'A': ['B', 'C'],
+             'B': ['C', 'D'],
+             'C': ['D'],
+             'D': ['C'],
+             'E': ['F'],
+             'F': ['C']}
+</pre>
+
+This is a dictionary whose keys are the nodes of the graph.  For each key, 
+the corresponding value is a list containing the nodes that are connected 
+by a direct arc from this node.  This is about as simple as it gets (even 
+simpler, the nodes could be represented by numbers instead of names, but 
+names are more convenient and can easily be made to carry more 
+information, such as city names).<p>
+
+Let's write a simple function to determine a path between two nodes.  It 
+takes a graph and the start and end nodes as arguments.  It will return a 
+list of nodes (including the start and end nodes) comprising the path.  
+When no path can be found, it returns None.  The same node will not occur 
+more than once on the path returned (i.e.  it won't contain cycles).  The 
+algorithm uses an important technique called <i>backtracking</i>: it tries 
+each possibility in turn until it finds a solution.</p><p>
+
+</p><pre>    def find_path(graph, start, end, path=[]):
+        path = path + [start]
+        if start == end:
+            return path
+        if not graph.has_key(start):
+            return None
+        for node in graph[start]:
+            if node not in path:
+                newpath = find_path(graph, node, end, path)
+                if newpath: return newpath
+        return None
+</pre>
+
+A sample run (using the graph above):
+
+<pre>    &gt;&gt;&gt; find_path(graph, 'A', 'D')
+    ['A', 'B', 'C', 'D']
+    &gt;&gt;&gt; 
+</pre>
+
+The second 'if' statement is necessary only in case there are nodes that are 
+listed as end points for arcs but that don't have outgoing arcs 
+themselves, and aren't listed in the graph at all.  Such nodes could also 
+be contained in the graph, with an empty list of outgoing arcs, but 
+sometimes it is more convenient not to require this.<p>
+
+Note that while the user calls find_graph() with three arguments, it calls 
+itself with a fourth argument: the path that has already been traversed.  
+The default value for this argument is the empty list, '[]', meaning no 
+nodes have been traversed yet.  This argument is used to avoid cycles (the 
+first 'if' inside the 'for' loop).  The 'path' argument is not modified: 
+the assignment "path = path + [start]" creates a new list.  If we had 
+written "path.append(start)" instead, we would have modified the variable 
+'path' in the caller, with disastrous results.  (Using tuples, we could 
+have been sure this would not happen, at the cost of having to write
+"path = path + (start,)" since "(start)" isn't a singleton tuple -- it is 
+just a parenthesized expression.)</p><p>
+
+It is simple to change this function to return a list of all paths (without 
+cycles) instead of the first path it finds:
+
+</p><pre>    def find_all_paths(graph, start, end, path=[]):
+        path = path + [start]
+        if start == end:
+            return [path]
+        if not graph.has_key(start):
+            return []
+        paths = []
+        for node in graph[start]:
+            if node not in path:
+                newpaths = find_all_paths(graph, node, end, path)
+                for newpath in newpaths:
+                    paths.append(newpath)
+        return paths
+</pre>
+
+A sample run:
+
+<pre>    &gt;&gt;&gt; find_all_paths(graph, 'A', 'D')
+    [['A', 'B', 'C', 'D'], ['A', 'B', 'D'], ['A', 'C', 'D']]
+    &gt;&gt;&gt; 
+</pre>
+
+Another variant finds the shortest path:
+
+<pre>    def find_shortest_path(graph, start, end, path=[]):
+        path = path + [start]
+        if start == end:
+            return path
+        if not graph.has_key(start):
+            return None
+        shortest = None
+        for node in graph[start]:
+            if node not in path:
+                newpath = find_shortest_path(graph, node, end, path)
+                if newpath:
+                    if not shortest or len(newpath) &lt; len(shortest):
+                        shortest = newpath
+        return shortest
+</pre>
+
+Sample run:
+
+<pre>    &gt;&gt;&gt; find_shortest_path(graph, 'A', 'D')
+    ['A', 'C', 'D']
+    &gt;&gt;&gt; 
+</pre>
+
+These functions are about as simple as they get.  Yet, they are nearly
+optimal (for code written in Python).  In another Python Patterns
+column, I will try to analyze their running speed and improve their
+performance, at the cost of more code.<p>
+
+Another variation would be to add more data abstraction: create a class to 
+represent graphs, whose methods implement the various algorithms.  While 
+this appeals to the desire for structured programming, it doesn't make the 
+code any more efficient (to the contrary).  It does make it easier to add 
+various labels to the nodes or arcs and to add algorithms that take those 
+labels into account (e.g. to find the shortest route between two cities on 
+a map).  This, too, will be the subject of another column.</p><p>
+
+
+
+    </p></article>
+
+
+                </section>
+
+                
+
+
+<aside class="left-sidebar" role="secondary">
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+    
+        <div class="twitter-widget sidebar-widget">
+        <iframe title="Twitter Timeline" data-user-id="63873759" data-widget-id="434113224703610882" style="position: static; visibility: visible; display: inline-block; width: 100%; height: 600px; padding: 0px; border: medium none; max-width: 520px; min-width: 180px; min-height: 200px; margin-top: 0px; margin-bottom: 0px;" class="twitter-timeline twitter-timeline-rendered" allowfullscreen="true" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+
+    <div class="psf-sidebar-widget sidebar-widget">
+        <h3 class="widget-title">The PSF</h3>
+<p>The Python Software Foundation is the organization behind Python. 
+Become a member of the PSF and help advance the software and our 
+mission. </p>
+        
+    </div>
+    
+</aside>
+
+
+
+                
+                
+
+
+            </div><!-- end .container -->
+        </div><!-- end #content .content-wrapper -->
+
+        <!-- Footer and social media list -->
+        <footer id="site-map" class="main-footer" role="contentinfo">
+            <div class="main-footer-links">
+                <div class="container">
+
+                    
+                    <a id="back-to-top-1" class="jump-link" href="#python-network"><span aria-hidden="true" class="icon-arrow-up"><span>▲</span></span> Back to Top</a>
+
+                    
+
+<ul style="position: relative; height: 473.917px;" class="sitemap navigation menu do-not-print" role="tree" id="container">
+    
+    <li style="position: absolute; left: 0px; top: 0px;" class="tier-1 element-1">
+        <a href="https://www.python.org/about/">About</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/about/apps/" title="">Applications</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/about/quotes/" title="">Quotes</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/about/gettingstarted/" title="">Getting Started</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/about/help/" title="">Help</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 196px; top: 0px;" class="tier-1 element-2">
+        <a href="https://www.python.org/downloads/">Downloads</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/downloads/" title="">All releases</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/downloads/source/" title="">Source code</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/downloads/windows/" title="">Windows</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/downloads/mac-osx/" title="">Mac OS X</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/download/other/" title="">Other Platforms</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://docs.python.org/3/license.html" title="">License</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/download/alternatives" title="">Alternative Implementations</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 392px; top: 0px;" class="tier-1 element-3">
+        <a href="https://www.python.org/doc/">Documentation</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/doc/" title="">Docs</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/doc/av" title="">Audio/Visual Talks</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://wiki.python.org/moin/BeginnersGuide" title="">Beginner's Guide</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://docs.python.org/devguide/" title="">Developer's Guide</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://docs.python.org/faq/" title="">FAQ</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="http://wiki.python.org/moin/Languages" title="">Non-English Docs</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="http://python.org/dev/peps/" title="">PEP Index</a></li>
+    
+        <li class="tier-2 element-8" role="treeitem"><a href="https://wiki.python.org/moin/PythonBooks" title="">Python Books</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 588px; top: 0px;" class="tier-1 element-4">
+        <a href="https://www.python.org/community/">Community</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/community/diversity/" title="">Diversity</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/community/irc/" title="">IRC</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/community/lists/" title="">Mailing Lists</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/community/workshops/" title="">Python Conferences</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/community/sigs/" title="">Special Interest Groups</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://wiki.python.org/moin/" title="">Python Wiki</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/community/logos/" title="">Python Logo</a></li>
+    
+        <li class="tier-2 element-8" role="treeitem"><a href="https://www.python.org/community/merchandise/" title="">Merchandise</a></li>
+    
+        <li class="tier-2 element-9" role="treeitem"><a href="https://www.python.org/community/awards" title="">Community Awards</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 784px; top: 0px;" class="tier-1 element-5">
+        <a href="https://www.python.org/about/success/" title="success-stories">Success Stories</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/about/success/#arts" title="">Arts</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/about/success/#business" title="">Business</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/about/success/#education" title="">Education</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/about/success/#engineering" title="">Engineering</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://www.python.org/about/success/#government" title="">Government</a></li>
+    
+        <li class="tier-2 element-6" role="treeitem"><a href="https://www.python.org/about/success/#scientific" title="">Scientific</a></li>
+    
+        <li class="tier-2 element-7" role="treeitem"><a href="https://www.python.org/about/success/#software-development" title="">Software Development</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 980px; top: 0px;" class="tier-1 element-6">
+        <a href="https://www.python.org/blogs/" title="News from around the Python world">News</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/blogs/" title="Python Insider Blog Posts">Python News</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="http://planetpython.org/" title="Planet Python">Community News</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="http://pyfound.blogspot.com/" title="PSF Blog">PSF News</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="http://pycon.blogspot.com/" title="PyCon Blog">PyCon News</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 0px; top: 215px;" class="tier-1 element-7">
+        <a href="https://www.python.org/events/">Events</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="https://www.python.org/events/python-events/" title="">Python Events</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="https://www.python.org/events/python-user-group/" title="">User Group Events</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://www.python.org/events/python-events/past/" title="">Python Events Archive</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="https://www.python.org/events/python-user-group/past/" title="">User Group Events Archive</a></li>
+    
+        <li class="tier-2 element-5" role="treeitem"><a href="https://wiki.python.org/moin/PythonEventsCalendar#Submitting_an_Event" title="">Submit an Event</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+    <li style="position: absolute; left: 980px; top: 215px;" class="tier-1 element-8">
+        <a href="https://www.python.org/dev/">Contributing</a>
+        
+            
+
+<ul class="subnav menu">
+    
+        <li class="tier-2 element-1" role="treeitem"><a href="http://docs.python.org/devguide/" title="">Developer's Guide</a></li>
+    
+        <li class="tier-2 element-2" role="treeitem"><a href="http://bugs.python.org/" title="">Issue Tracker</a></li>
+    
+        <li class="tier-2 element-3" role="treeitem"><a href="https://mail.python.org/mailman/listinfo/python-dev" title="">python-dev list</a></li>
+    
+        <li class="tier-2 element-4" role="treeitem"><a href="http://pythonmentors.com/" title="">Core Mentorship</a></li>
+    
+</ul>
+
+        
+    </li>
+    
+</ul>
+
+
+                    <a id="back-to-top-2" class="jump-link" href="#python-network"><span aria-hidden="true" class="icon-arrow-up"><span>▲</span></span> Back to Top</a>
+                    
+
+                </div><!-- end .container -->
+            </div> <!-- end .main-footer-links -->
+
+            <div class="site-base">
+                <div class="container">
+                    
+                    <ul class="footer-links navigation menu do-not-print" role="tree">
+                        <li class="tier-1 element-1"><a href="https://www.python.org/about/help/">Help &amp; <span class="say-no-more">General</span> Contact</a></li>
+                        <li class="tier-1 element-2"><a href="https://www.python.org/community/diversity/">Diversity <span class="say-no-more">Initiatives</span></a></li>
+                        <li class="tier-1 element-3"><a href="https://github.com/python/pythondotorg/issues">Submit Website Bug</a></li>
+                        <!--<li class="tier-1 element-3"><a href="#"><span class="say-no-more">Website</span> Colophon</a></li>-->
+                    </ul>
+
+                    <div class="copyright">
+                        <p><small>
+                            <span class="pre">Copyright ©2001-2015.</span>
+                            &nbsp;<span class="pre"><a href="https://www.python.org/psf-landing/">Python Software Foundation</a></span>
+                            &nbsp;<span class="pre"><a href="https://www.python.org/about/legal/">Legal Statements</a></span>
+                            &nbsp;<span class="pre"><a href="https://www.python.org/privacy/">Privacy Policy</a></span>
+                        </small></p>
+                    </div>
+
+                </div><!-- end .container -->
+            </div><!-- end .site-base -->
+
+        </footer>
+
+    </div><!-- end #touchnav-wrapper -->
+
+    
+    <script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
+
+    <script src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/masonry.js"></script>
+
+    <script type="text/javascript" src="Python%20Patterns%20-%20Implementing%20Graphs%20_%20Python.org_files/main-min.js" charset="utf-8"></script>
+    
+
+    <!--[if lte IE 7]>
+    <script type="text/javascript" src="/static/js/plugins/IE8-min.js" charset="utf-8"></script>
+    
+    
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="/static/js/plugins/getComputedStyle-min.js" charset="utf-8"></script>
+    
+    
+    <![endif]-->
+
+    
+
+    
+    
+
+
+
+</body></html>

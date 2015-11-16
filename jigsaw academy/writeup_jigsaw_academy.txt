@@ -1,0 +1,31 @@
+Where do we use python:
+We use python in a lot of scientific applications.
+
+Where have i used it:
+Python has very powerful modules dedicated to application. Some of those i have experienced are:
+
+OepnCV: Image processing toolkit for computer vision related applications
+NLTK: Natural language toolkit. we use this for applications such as text mining, for instance- twitter sentiment analysis, rating of products of amazon...
+Nympy, Scikit learn, matplotlib: Images are nothing but arrays. Whenever we need to perform some manipulation in these matrices (say take negative of an image, we simply change the data contained in these arrays by using array tools such as numpy.)  
+Machine learning applications (say, regression/classification) need to be trained and tested to check their accuracy/performance for analysis over new data using various algorithms available,
+such as logistic regression. These scientific algorithms are avilable as a part of scikitlearn kit. Data visualisation/plotting is usually done using tools such as pyqt/matplotlib.
+
+I have used these tools as a part of different courses and online learnings over the past few years as a part of personal learning. Professionally, 
+I have used python during my research internship for a problem on visual object detection (project report attached here).
+
+
+Python videos:
+I think if this works out, we can start with basic python programming- tuples, dictionary, methods, object oriented programming and later touch a few applications in brief.
+Covering a few hours should be easy. We will see how it goes..
+
+SVM: SVM is just one algorithm out of the 100 available. We can talk over this topic later, if you feel like. 
+a suggestion: There are many methods and you might consider having a session on machine learning in general.
+
+
+
+Best,
+Rahul
+
+
+
+

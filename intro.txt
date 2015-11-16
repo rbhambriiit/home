@@ -1,0 +1,167 @@
+Tuples are fixed size in nature whereas lists are dynamic.In other words, a tuple is immutable whereas a list is mutable.
+You can't add elements to a tuple. Tuples have no append or extend method.
+You can't remove elements from a tuple. Tuples have no remove or pop method.
+You can find elements in a tuple, since this doesn’t change the tuple. 
+
+Tuples are faster than lists. If you're defining a constant set of values and all you're ever going to do with it is iterate through it, use a tuple instead of a list.
+It makes your code safer if you “write-protect” data that does not need to be changed. Using a tuple instead of a list is like having an implied assert statement that this data is constant, and that special thought (and a specific function) is required to override that.
+Some tuples can be used as dictionary keys (specifically, tuples that contain immutable values like strings, numbers, and other tuples). Lists can never be used as dictionary keys, because lists are not immutable. 
+
+This also means that tuples can be used for dictionary keys, wheres lists cannot.
+
+
+
+
+LOGS:
+Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:44:40) [MSC v.1600 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> x = ('Glenn', 'Sally', 'Joseph')
+>>> x
+('Glenn', 'Sally', 'Joseph')
+>>> x[0]
+'Glenn'
+>>> x[1]
+'Sally'
+>>> x[2]
+'Joseph'
+>>> max(x)
+'Sally'
+>>> y = ( 1, 9, 2 )
+
+>>> y
+(1, 9, 2)
+>>> for i in y:
+	print y
+	
+SyntaxError: Missing parentheses in call to 'print'
+>>> for i in y:
+	print y
+	
+SyntaxError: Missing parentheses in call to 'print'
+>>> for i in y:
+	print(i)
+
+	
+1
+9
+2
+>>> for i in y:
+	print(y)
+
+	
+(1, 9, 2)
+(1, 9, 2)
+(1, 9, 2)
+>>> 
+>>> 
+>>> list=[1,2,3]
+>>> list
+[1, 2, 3]
+>>> list[2]=4
+>>> list
+[1, 2, 4]
+>>> str='abc'
+>>> str[0]
+'a'
+>>> str[0]='d'
+Traceback (most recent call last):
+  File "<pyshell#26>", line 1, in <module>
+    str[0]='d'
+TypeError: 'str' object does not support item assignment
+>>> 
+>>> y
+(1, 9, 2)
+>>> y[1]=9
+Traceback (most recent call last):
+  File "<pyshell#29>", line 1, in <module>
+    y[1]=9
+TypeError: 'tuple' object does not support item assignment
+>>> y.sort()
+Traceback (most recent call last):
+  File "<pyshell#30>", line 1, in <module>
+    y.sort()
+AttributeError: 'tuple' object has no attribute 'sort'
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> y.append(5)
+Traceback (most recent call last):
+  File "<pyshell#38>", line 1, in <module>
+    y.append(5)
+AttributeError: 'tuple' object has no attribute 'append'
+>>> 
+>>> 
+>>> 
+>>> 
+>>> y.reverse()
+Traceback (most recent call last):
+  File "<pyshell#43>", line 1, in <module>
+    y.reverse()
+AttributeError: 'tuple' object has no attribute 'reverse'
+>>> 
+>>> 
+>>> list.reverse()
+>>> 
+>>> 
+>>> list
+[4, 2, 1]
+>>> 
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> 
+>>> 
+>>> dir(y)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+>>> 
+>>> 
+>>> 
+>>> y
+(1, 9, 2)
+>>> 
+>>> 
+>>> (a,b,c)=y
+>>> a
+1
+>>> b
+9
+>>> c
+2
+>>> 
+>>> 
+>>> list
+[4, 2, 1]
+>>> [j,k,l]=list
+>>> j
+4
+>>> k
+2
+>>> l
+1
+>>> 
+>>> (e,r,t)=list
+>>> e
+4
+>>> r
+2
+>>> t
+1
+>>> dir(dict())
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+>>> 
+>>> 
+>>> tup=(1,2,'a')
+>>> tup
+(1, 2, 'a')
+>>> 
+>>> list2=['a',2]
+>>> list2
+['a', 2]
+>>> type(tup)
+<class 'tuple'>
+>>> 
+>>> 
+>>> 
