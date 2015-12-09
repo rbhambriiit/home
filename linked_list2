@@ -1,0 +1,67 @@
+##linked list phase2
+from linked_list import Node
+from linked_list import LinkedList
+
+
+def mergelists(head1,head2):
+    new_head=None
+    while(head1 and head2):
+        if(head1.data<head2.data):
+            if(new_head):
+                current.nextnode=head1
+                current=head1
+            else:
+                new_head=head1
+            current=head1   
+#            print("current node is ",current.data)
+            head1=head1.nextnode
+        else:
+            if(new_head):
+                current.nextnode=head2
+                current=head2
+            else:
+                new_head=head2
+                current=head2
+            current=head2   
+ #           print("current node is ",current.data)
+            head2=head2.nextnode
+
+    if(head1):
+        current.nextnode=head1
+        
+    if(head2):
+        current.nextnode=head2
+                
+    return new_head
+
+'''     
+    while(head2):
+        head2_next=head1.nextnode
+        head2.nextnode=new_head
+        new_head=head2
+        head2=head2_next
+        
+   '''         
+
+list1=LinkedList(Node(12))
+list1.insert(6)
+list1.insert(1)
+
+#list1.show()
+
+
+list2=LinkedList(Node(115))
+list2.insert(15)
+list2.insert(5)
+list2.insert(2)
+
+#list2.show()
+
+
+new_head=mergelists(list1.head,list2.head)
+print("new list:")
+
+while(new_head):
+    print(new_head.data)
+    new_head=new_head.nextnode
+
