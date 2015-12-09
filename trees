@@ -1,0 +1,72 @@
+'''
+Trees:
+Height:
+longest distance from the leaf
+h(leaf)=0
+longest: max(find height of each of the children ) +1
+balancing trees: absolute difff of height between two cildren cant be more than one. such trees have overall height proportional to O(logn)
+
+OR
+
+depth: traverse from this node as root till leaves. number of nodes traversed (include root)
+
+'''
+
+
+'''
+problem1: find if  a tree is balanced
+find max depth and min depth per node: if diff >2 return False
+'''
+
+
+class TreeNode:
+    def __init__(self,data,children=None):
+        self.data=data
+        if children == None:
+            self.children=[]
+        else:
+            self.children=children
+
+    def addchild(self,node):
+        self.children.append(node)
+
+    def show(self,level=0):
+        print("level",level,":",self.data)
+        for child in self.children:
+            child.show(level+1)
+
+def MinDepth(node):
+    if node.children ==[]:
+        return 1
+    else:
+        return 1+ min(MinDepth(x) for x in node.children)
+
+
+def MaxDepth(node):
+    if node.children ==[]:
+        return 1
+    else:
+        return 1+ max(MaxDepth(x) for x in node.children)
+
+def IsBalanced(node):
+    MAX=MaxDepth(node)
+    MIN=MinDepth(node)
+    return (MAX-MIN <2)
+
+n1 = TreeNode("1")
+n2 = TreeNode("2")  
+n3 = TreeNode("3",[n1,n2])
+n4 = TreeNode("4")
+n5 = TreeNode("5",[n4])
+n6 = TreeNode("6",[n5])
+n7 = TreeNode("7",[n6,n3])
+##n7.show()
+print(MinDepth(n7))  ##should be 3
+print(MaxDepth(n7))  ##should be 4
+print(IsBalanced(n7))  ## True
+
+
+
+print(MinDepth(n6))  ##should be 3
+print(MaxDepth(n6))  ##should be 4
+print(IsBalanced(n6))  ## True
