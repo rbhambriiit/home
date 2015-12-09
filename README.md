@@ -1,2 +1,2 @@
-# home
-general code
+# home; 
+general code: mostly python...
