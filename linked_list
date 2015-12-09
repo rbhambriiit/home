@@ -1,0 +1,129 @@
+'''
+Implementing a singly linked list in Python
+'''
+
+
+class Node:
+    def __init__(self,data=None,nextnode=None):
+        self.data=data
+        self.nextnode=nextnode
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.nextnode
+
+    def setnext(self,nextnode):
+        self.nextnode=nextnode
+
+
+
+class LinkedList():
+    def __init__(self,head=None):
+        self.head=head
+
+    def insert(self,data):
+        newnode=Node(data,self.head)
+        self.head=newnode
+
+    def size(self):
+        count=0
+        current=self.head
+##        print(current)
+        while (current):
+            count +=1
+            current=current.nextnode
+        return count
+
+    def search(self,data):
+        current=self.head
+        while(current != None):
+            if (current.data == data):
+                return current
+            else:
+                current=current.nextnode
+        return False
+
+
+    def delete(self,data):
+        current=self.head
+        prev=None
+        while(current != None):
+            if (current.data==data):
+                prev.nextnode=current.nextnode
+                ##print(current.nextnode.data)
+                del current
+                return True
+            else:
+                prev=current
+                current=current.nextnode
+        return False
+
+    def show(self):
+        current=self.head
+        while(current):
+            print(current.data)
+            current=current.nextnode
+
+
+##test n main
+
+'''
+#test1:
+ll=LinkedList(Node("sid"))
+assert ll.head.get_next() == None
+
+ll.insert("arpit")
+
+assert ll.head.get_data() == "arpit"
+
+print(ll.size())
+ll.show()
+'''
+
+'''
+##test2:
+ll=LinkedList(Node("sid"))
+ll.insert("arpit")
+ll.insert("goel")
+ll.insert("apoorva")
+
+print(ll.size())
+ll.show()
+
+
+print(ll.search("bams"))
+found=ll.search("goel")
+ '''
+'''
+##test3:
+
+ll=LinkedList(Node("sid"))
+ll.insert("arpit")
+ll.insert("goel")
+ll.insert("apoorva")
+ll.delete("arpit")
+print(ll.size())
+ll.insert("bams")
+ll.delete("apoorva")
+
+ll.show()
+'''
+
+
+'''
+##test4
+print(ll.delete("bams"))
+
+ll2=LinkedList()
+print(ll2.delete("bams"))
+'''
+
+    
+
+    
+        
+        
+
+        
