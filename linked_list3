@@ -1,0 +1,120 @@
+##linked list phase3
+##http://www.geeksforgeeks.org/compare-two-strings-represented-as-linked-lists/
+
+class Node:
+    def __init__(self,data=None,nextnode=None):
+        self.data=data
+        self.nextnode=nextnode
+
+    def get_data(self):
+        return self.data
+
+    def get_next(self):
+        return self.nextnode
+
+    def setnext(self,nextnode):
+        self.nextnode=nextnode
+
+
+
+class LinkedList():
+    def __init__(self,head=None):
+        self.head=head
+        self.tail=head
+
+    def insert(self,data):
+        newnode=Node(data)
+        self.tail.nextnode=newnode
+        self.tail=newnode
+
+    def size(self):
+        count=0
+        current=self.head
+##        print(current)
+        while (current):
+            count +=1
+            current=current.nextnode
+        return count
+
+    def search(self,data):
+        current=self.head
+        while(current != None):
+            if (current.data == data):
+                return current
+            else:
+                current=current.nextnode
+        return False
+
+
+    def delete(self,data):
+        current=self.head
+        prev=None
+        while(current != None):
+            if (current.data==data):
+                prev.nextnode=current.nextnode
+                ##print(current.nextnode.data)
+                del current
+                return True
+            else:
+                prev=current
+                current=current.nextnode
+        return False
+
+    def show(self):
+        current=self.head
+        while(current):
+            print(current.data)
+            current=current.nextnode
+
+
+def compare(list1,list2):
+    node1=list1.head
+    node2=list2.head
+    while(node1 and node2):
+        if (node1.data > node2.data):
+            return 1
+        elif (node1.data < node2.data):
+            return -1
+        else:
+            node1=node1.nextnode
+            node2=node2.nextnode
+    if(node1):
+        return 1
+    elif(node2):
+        return -1
+    else:
+        return 0        
+            
+
+list1=LinkedList(Node('g'))
+list1.insert('e')
+list1.insert('k')
+list1.insert('s')
+list1.insert('a')
+
+#list1.show()
+
+list2=LinkedList(Node('g'))
+list2.insert('e')
+list2.insert('k')
+list2.insert('s')
+list2.insert('b')
+
+#list2.show()
+
+#print(compare(list1,list2))
+#-1
+
+list2.delete('b')
+#list2.show()
+
+#print(compare(list1,list2))
+#1
+
+
+list1.delete('a')
+#list1.show()
+
+print(compare(list1,list2))
+#0
+
