@@ -1,0 +1,79 @@
+###http://www.geeksforgeeks.org/check-whether-binary-tree-complete-not-set-2-recursive-solution/
+
+class Treenode:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+
+'''
+def buildlist(node,index):
+    print("node is",node.data)
+    print("index is",index)
+    mylist[index]=node.data
+    if(node.left):
+        buildlist(node.left,2*index+1)
+    if(node.right):
+        buildlist(node.right,2*index+2)
+'''
+
+def count_nodes_global_var(root):
+    if(root):
+        global count
+        count += 1
+        if(root.left):
+            count_nodes_global_var(root.left)
+        if(root.right):
+            count_nodes_global_var(root.right)
+    return 
+
+
+def count_nodes_recursion(root):
+    if root is None:
+        return 0
+    else:
+        return 1+count_nodes_recursion(root.left)+count_nodes_recursion(root.right)
+
+
+def tree_is_complete(node,index,node_count):
+    if(node):
+        #print("node is",node.data)
+        #print("index_is",index)
+        if(index>=node_count):
+            print("index" ,index, ">node_count",node_count )
+            return False
+        return (tree_is_complete(node.left,2*index+1,node_count) and tree_is_complete(node.right,2*index+2,node_count))
+    return True        
+            
+    
+    
+##main
+n1=Treenode(10)
+n1.left=Treenode(9)
+n1.right=Treenode(8)
+n1.left.left=Treenode(7)
+n1.left.right=Treenode(6)
+n1.right.left=Treenode(5)
+n1.right.right=Treenode(4)
+n1.left.left.left=Treenode(3)
+n1.left.left.right=Treenode(2)
+n1.left.right.left=Treenode(1)
+
+##counting the number of nodes in  tree
+count=0
+##count_nodes_global_var(n1)
+node_count=count_nodes_recursion(n1)
+print(node_count)
+
+'''
+mylist=[-1]
+mylist=buildlist(n1,0)
+'''
+
+print(tree_is_complete(n1,0,node_count))
+##returns True
+
+## to check false condition, comment a node 
+
+
+    
