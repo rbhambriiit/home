@@ -1,0 +1,53 @@
+class node():
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+
+
+
+##5 12 10 2 21 
+        
+head=node(5)
+head.next=node(12)
+head.next.next=node(10)
+head.next.next.next=node(2)
+head.next.next.next.next=node(21)
+
+def reverse_list(head,tail=None):
+    print("reading head",head.data)
+    if(head.next):
+        (rem,tail)=reverse_list(head.next)
+        print("returning:",rem.data,"assigning next as",head.data)
+        rem.next=head
+        #print("returned:",rem.data,rem.next.data)
+        head.next=None
+    else:
+        tail=head
+    return(head,tail)    
+    
+    
+def print_list(head):
+    while(head is not None):
+        print(head.data)
+        head=head.next
+
+
+def reverse_list_iterative(head):
+    prev=None
+    while(head is not None):
+        print("reading",head.data)
+        next=head.next
+        head.next=prev
+        prev=head
+        head=next
+    return prev    
+        
+
+
+#(head,tail)=reverse_list(head)
+#print(tail.data)
+
+tail=reverse_list_iterative(head)
+
+print_list(tail)
