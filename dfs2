@@ -1,0 +1,28 @@
+##graph traversal:
+
+graph={0:[1,2],1:[2],2:[0,3],3:[3],4:[5,6],5:[2],6:[]}
+
+def dfs(graph,start,visited=[]):
+    if start not in visited:
+        print("visiting",start)
+        visited.append(start)
+        print("so far trajectory looks like:",visited)
+        for node in graph[start]:
+            dfs(graph,node)
+    
+
+
+#dfs(graph,start)
+
+
+##list of vertices:
+vertices=graph.keys()
+print(vertices)
+
+
+for vertex in vertices:
+    dfs(graph,vertex)
+
+
+http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/ 
+part2
