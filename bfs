@@ -1,0 +1,25 @@
+##graph traversal:
+
+graph={0:[1,2],1:[2],2:[0,3],3:[3]}
+
+
+def bfs(graph,start):
+    visited=[]
+    queue=[start]
+    while(queue):
+        node=queue.pop(0)
+        if node not in visited:
+            visited.append(node)
+            for vertices in graph[node]:
+                queue.append(vertices)
+        
+    return visited        
+
+
+start=2
+print(bfs(graph,start))
+
+
+source:
+http://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/
+
