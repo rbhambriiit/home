@@ -1,0 +1,638 @@
+python handout:
+
+
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 "/Applications/PyCharm 2.app/Contents/helpers/pydev/pydevconsole.py" 63039 63040
+PyDev console: starting.
+
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/Users/rahulbhambri/work/git/dev repo/Topic_Mapping/MLP'])
+
+Python 2.7.10 (default, Feb  6 2017, 23:53:20) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+>>> a = [1,2,3,4]
+>>> b = [5,6,7]
+>>> for x,y in zip(a,b):
+...     print x,'--->>',y
+...     
+1 --->> 5
+2 --->> 6
+3 --->> 7
+>>> for x,y in izip(a,b):
+...     print x,'--->>',y
+...     
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'izip' is not defined
+>>> for x,y in itertools.izip(a,b):
+...     print x,'--->>',y
+...     
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'itertools' is not defined
+>>> 
+>>> import itertools
+>>> for x,y in itertools.izip(a,b):
+...     print x,'--->>',y
+...     
+1 --->> 5
+2 --->> 6
+3 --->> 7
+>>> z = zip(l1, l2)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'l1' is not defined
+>>> z = zip(a,b)
+>>> from itertools import izip
+>>> iz = izip(l1, l2)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'l1' is not defined
+>>> iz = izip(a,b)
+>>> isinstance(z,list)
+True
+>>> isinstance(iz,list)
+False
+>>> z[0]
+(1, 5)
+>>> z[0]
+(1, 5)
+>>> iz[0]
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: 'itertools.izip' object has no attribute '__getitem__'
+>>> z[::2]
+[(1, 5), (3, 7)]
+>>> iz[::2]
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: 'itertools.izip' object has no attribute '__getitem__'
+>>> l = ['a','b','c','d']
+>>> sorted(l)
+['a', 'b', 'c', 'd']
+>>> sorted(l,reverse=True)
+['d', 'c', 'b', 'a']
+>>> help(sorted(l))
+Help on list object:
+
+class list(object)
+ |  list() -> new empty list
+ |  list(iterable) -> new list initialized from iterable's items
+ |  
+ |  Methods defined here:
+ |  
+ |  __add__(...)
+ |      x.__add__(y) <==> x+y
+ |  
+ |  __contains__(...)
+ |      x.__contains__(y) <==> y in x
+ |  
+ |  __delitem__(...)
+ |      x.__delitem__(y) <==> del x[y]
+ |  
+ |  __delslice__(...)
+ |      x.__delslice__(i, j) <==> del x[i:j]
+ |      
+ |      Use of negative indices is not supported.
+ |  
+ |  __eq__(...)
+ |      x.__eq__(y) <==> x==y
+ |  
+ |  __ge__(...)
+ |      x.__ge__(y) <==> x>=y
+ |  
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |  
+ |  __getitem__(...)
+ |      x.__getitem__(y) <==> x[y]
+ |  
+ |  __getslice__(...)
+ |      x.__getslice__(i, j) <==> x[i:j]
+ |      
+ |      Use of negative indices is not supported.
+ |  
+ |  __gt__(...)
+ |      x.__gt__(y) <==> x>y
+ |  
+ |  __iadd__(...)
+ |      x.__iadd__(y) <==> x+=y
+ |  
+ |  __imul__(...)
+ |      x.__imul__(y) <==> x*=y
+ |  
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see help(type(x)) for signature
+ |  
+ |  __iter__(...)
+ |      x.__iter__() <==> iter(x)
+ |  
+ |  __le__(...)
+ |      x.__le__(y) <==> x<=y
+ |  
+ |  __len__(...)
+ |      x.__len__() <==> len(x)
+ |  
+ |  __lt__(...)
+ |      x.__lt__(y) <==> x<y
+ |  
+ |  __mul__(...)
+ |      x.__mul__(n) <==> x*n
+ |  
+ |  __ne__(...)
+ |      x.__ne__(y) <==> x!=y
+ |  
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |  
+ |  __reversed__(...)
+ |      L.__reversed__() -- return a reverse iterator over the list
+ |  
+ |  __rmul__(...)
+ |      x.__rmul__(n) <==> n*x
+ |  
+ |  __setitem__(...)
+ |      x.__setitem__(i, y) <==> x[i]=y
+ |  
+ |  __setslice__(...)
+ |      x.__setslice__(i, j, y) <==> x[i:j]=y
+ |      
+ |      Use  of negative indices is not supported.
+ |  
+ |  __sizeof__(...)
+ |      L.__sizeof__() -- size of L in memory, in bytes
+ |  
+ |  append(...)
+ |      L.append(object) -- append object to end
+ |  
+ |  count(...)
+ |      L.count(value) -> integer -- return number of occurrences of value
+ |  
+ |  extend(...)
+ |      L.extend(iterable) -- extend list by appending elements from the iterable
+ |  
+ |  index(...)
+ |      L.index(value, [start, [stop]]) -> integer -- return first index of value.
+ |      Raises ValueError if the value is not present.
+ |  
+ |  insert(...)
+ |      L.insert(index, object) -- insert object before index
+ |  
+ |  pop(...)
+ |      L.pop([index]) -> item -- remove and return item at index (default last).
+ |      Raises IndexError if list is empty or index is out of range.
+ |  
+ |  remove(...)
+ |      L.remove(value) -- remove first occurrence of value.
+ |      Raises ValueError if the value is not present.
+ |  
+ |  reverse(...)
+ |      L.reverse() -- reverse *IN PLACE*
+ |  
+ |  sort(...)
+ |      L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+ |      cmp(x, y) -> -1, 0, 1
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __hash__ = None
+ |  
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+
+>>> 
+>>> sorted(l,reverse=True)
+['d', 'c', 'b', 'a']
+>>> l = ['a','b','c','ds']
+>>> sorted(l,reverse=True)
+['ds', 'c', 'b', 'a']
+>>> sorted(l,key=len)
+['a', 'b', 'c', 'ds']
+>>> sorted(l,key=len,reverse=True)
+['ds', 'a', 'b', 'c']
+>>> sorted(l,cmpa=compare)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'compare' is not defined
+>>> sorted(l,cmp=compare)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'compare' is not defined
+
+
+
+=================
+
+
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 "/Applications/PyCharm 2.app/Contents/helpers/pydev/pydevconsole.py" 63757 63758
+PyDev console: starting.
+
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/Users/rahulbhambri/work/git/dev repo/Topic_Mapping/MLP'])
+
+Python 2.7.10 (default, Feb  6 2017, 23:53:20) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+>>> from functools import partial
+>>> def power(base, exponent):
+    return base ** exponent
+>>> square = partial(power, exponent=2)
+cube = partial(power, exponent=3)
+
+>>> square
+<functools.partial object at 0x1028d59f0>
+>>> square(3)
+9
+>>> assert cube(2) == 8
+>>> assert square(2) == 4
+>>> dir(square)
+['__call__', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', 'args', 'func', 'keywords']
+>>> square.func
+<function power at 0x102925c80>
+>>> 
+>>> square.keywords
+{'exponent': 2}
+>>> square = partial(power, exponent=2,base=10)
+
+>>> square.func
+<function power at 0x102925c80>
+>>> square.keywords
+{'base': 10, 'exponent': 2}
+>>> square(3)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: power() got multiple values for keyword argument 'base'
+>>> square()
+100
+
+
+===================
+
+
+
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 "/Applications/PyCharm 2.app/Contents/helpers/pydev/pydevconsole.py" 51274 51275
+PyDev console: starting.
+
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/Users/rahulbhambri/work/git/dev repo/Topic_Mapping/MLP'])
+
+Python 2.7.10 (default, Feb  6 2017, 23:53:20) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+>>> l1 = [1,2,3]
+>>> l2 = [5,6,7]
+>>> z = zip(l1,l2)
+>>> z
+[(1, 5), (2, 6), (3, 7)]
+>>> d = dict(z)
+>>> d
+{1: 5, 2: 6, 3: 7}
+>>> from itertools import izip
+>>> iz = izip(l1,l2)
+>>> iz
+<itertools.izip object at 0x10127c488>
+>>> d2 = dict(iz)
+>>> d2
+{1: 5, 2: 6, 3: 7}
+>>> d2 = dict(iz)
+>>> d2
+{}
+>>> d
+{1: 5, 2: 6, 3: 7}
+>>> dir(d)
+['__class__', '__cmp__', '__contains__', '__delattr__', '__delitem__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'has_key', 'items', 'iteritems', 'iterkeys', 'itervalues', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values', 'viewitems', 'viewkeys', 'viewvalues']
+>>> d.get()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: get expected at least 1 arguments, got 0
+>>> help(d.get)
+Help on built-in function get:
+
+get(...)
+    D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None.
+
+>>> d.get(4)
+>>> d.get(1)
+5
+>>> d.get(4,0  )
+0
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> names = ['abc','defs','pq','rstu']
+>>> for name in names:
+...     
+... 
+... pass
+  File "<input>", line 5
+    pass
+       ^
+IndentationError: expected an indented block
+>>> op = {}
+>>> for name in names:
+...     key = len(name)
+...     if key not in op:
+...         op[key] = []
+...     op[key].append(name)
+...     
+>>> op
+{2: ['pq'], 3: ['abc'], 4: ['defs', 'rstu']}
+>>> 
+
+=============
+
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 "/Applications/PyCharm 2.app/Contents/helpers/pydev/pydevconsole.py" 52986 52987
+PyDev console: starting.
+
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/Users/rahulbhambri/work/git/dev repo/Topic_Mapping/MLP'])
+
+Python 2.7.10 (default, Feb  6 2017, 23:53:20) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+>>> op2 = {}
+>>> names = ['abc','defs','pq','rstu']
+>>> for name in names:
+...     key = len(name)
+...     op2.setdefault(key,[]).append(name)
+...     
+>>> op2
+{2: ['pq'], 3: ['abc'], 4: ['defs', 'rstu']}
+>>> 
+>>> help(op2.setdefault())
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: setdefault expected at least 1 arguments, got 0
+>>> help(op2.setdefault)
+Help on built-in function setdefault:
+
+setdefault(...)
+    D.setdefault(k[,d]) -> D.get(k,d), also set D[k]=d if k not in D
+
+>>> op3 = defaultdict(names)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'defaultdict' is not defined
+>>> from collections import defaultdict
+>>> op3 = defaultdict(names)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: first argument must be callable
+>>> op3 = defaultdict(list)
+>>> for name in names:
+...     key = len(name)
+...     op3[key].append(name)
+...     
+>>> op3
+defaultdict(<type 'list'>, {2: ['pq'], 3: ['abc'], 4: ['defs', 'rstu']})
+>>> for k in op3:
+...     print k
+...     
+2
+3
+4
+>>> type(op3)
+<type 'collections.defaultdict'>
+
+
+
+
+
+========
+defaults = {'color':'red','user':'guest'}
+
+>>> d = defaults. copy()
+>>> d
+{'color': 'red', 'user': 'guest'}
+>>> import os
+>>> os.environ
+{'PYTHONIOENCODING': 'UTF-8', 'TERM': 'emacs', 'SHELL': '/bin/bash', 'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'PYCHARM_HOSTED': '1', 'VERSIONER_PYTHON_VERSION': '2.7', 'PYTHONPATH': '/Applications/PyCharm 2.app/Contents/helpers/pydev', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.5WXyA86KfW/Listeners', 'LC_CTYPE': 'en_US.UTF-8', 'PYTHONDONTWRITEBYTECODE': '1', '__CF_USER_TEXT_ENCODING': '0x1F5:0x0:0x0', 'Apple_PubSub_Socket_Render': '/private/tmp/com.apple.launchd.jnNUUHNNts/Render', 'LOGNAME': 'rahulbhambri', 'USER': 'rahulbhambri', 'XPC_SERVICE_NAME': 'com.jetbrains.pycharm.5308', 'HOME': '/Users/rahulbhambri', 'PATH': '/Users/rahulbhambri/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin', 'XPC_FLAGS': '0x0', 'PYTHONUNBUFFERED': '1', 'TMPDIR': '/var/folders/fk/_s7w5dk52817p97sygkn6vqm0000gn/T/', 'IPYTHONENABLE': 'True'}
+
+
+>>> help(d.update)
+Help on built-in function update:
+
+update(...)
+    D.update([E, ]**F) -> None.  Update D from dict/iterable E and F.
+    If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+    If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+    In either case, this is followed by: for k in F: D[k] = F[k]
+
+>>> d.update(os.environ)
+>>> d
+{'PYTHONIOENCODING': 'UTF-8', 'color': 'red', 'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'LC_CTYPE': 'en_US.UTF-8', 'PYTHONDONTWRITEBYTECODE': '1', 'LOGNAME': 'rahulbhambri', 'USER': 'rahulbhambri', 'HOME': '/Users/rahulbhambri', 'PATH': '/Users/rahulbhambri/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin', 'PYTHONUNBUFFERED': '1', 'TERM': 'emacs', 'SHELL': '/bin/bash', 'VERSIONER_PYTHON_VERSION': '2.7', 'XPC_FLAGS': '0x0', 'XPC_SERVICE_NAME': 'com.jetbrains.pycharm.5308', 'PYTHONPATH': '/Applications/PyCharm 2.app/Contents/helpers/pydev', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.5WXyA86KfW/Listeners', 'Apple_PubSub_Socket_Render': '/private/tmp/com.apple.launchd.jnNUUHNNts/Render', 'user': 'guest', 'TMPDIR': '/var/folders/fk/_s7w5dk52817p97sygkn6vqm0000gn/T/', 'IPYTHONENABLE': 'True', 'PYCHARM_HOSTED': '1', '__CF_USER_TEXT_ENCODING': '0x1F5:0x0:0x0'}
+
+
+
+=============
+
+unpacking:
+
+
+def fib1(n):
+    x = 0
+    y = 1
+    for i in range(n):
+        print x
+        t = y
+        y = x+y
+        x = t
+
+
+def fib2(n):
+    x = 0
+    y = 1
+    for i in range(n):
+        print x
+        x,y = y,x+y
+
+n = 5
+# fib1(n)
+fib2(n)
+
+======
+
+list comprehencsion, generators
+
+>>> sum([i**2 for i in xrange(10)])
+285
+>>> sum(i**2 for i in xrange(10))
+285
+
+======
+
+decorators:
+
+source: https://www.youtube.com/watch?v=fVon4QaY4wo
+
+phase 1:
+-------------------
+
+def outside():
+    def inside():
+        print 'wassup'
+
+    return inside
+
+
+# main
+myfunc = outside()
+print myfunc
+myfunc()
+
+op:
+
+/Users/rahulbhambri/work/venv/bin/python2.7 "/Users/rahulbhambri/work/git/scripts/python executions_rahul/decorators.py"
+<function inside at 0x10b0bbcf8>
+wassup
+
+Process finished with exit code 0
+
+-------------------
+
+phase 2:
+
+
+
+def outside():
+    x = 5
+    def inside():
+        print x
+
+    return inside
+
+
+# main
+myfunc = outside()
+myfunc()
+
+op:
+/Users/rahulbhambri/work/venv/bin/python2.7 "/Users/rahulbhambri/work/git/scripts/python executions_rahul/decorators.py"
+5
+
+Process finished with exit code 0
+
+## similar to class
+----------------
+
+
+phase 3:
+
+
+def outside(x = 5):
+    def inside():
+        print x
+
+    return inside
+
+
+# main
+myfunc = outside()
+myfunc()
+
+op:5
+
+
+
+--------
+
+
+
+def outside(x = 5):
+    def inside():
+        print x
+
+    return inside
+
+
+# main
+myfunc = outside(7)
+myfunc()
+
+op:7
+
+----------------
+
+
+phase 4:
+
+
+def add_one(myfunc):
+    def adder():
+        return myfunc()+1
+    return adder
+
+
+def old_func():
+    return 3
+
+
+newfunc = add_one(old_func)
+print old_func(),newfunc()
+
+
+
+
+op: 3 4
+
+-----------------
+
+phase 5:
+
+
+def add_one(myfunc):
+    def adder():
+        return myfunc()+1
+    return adder
+
+
+def old_func():
+    return 3
+
+
+old_func = add_one(old_func)
+print old_func()
+
+op: 4
+
+------------------
+
+
+phase 6:
+
+
+def add_one(myfunc):
+    def adder():
+        return myfunc()+1
+    return adder
+
+
+@add_one
+def old_func():
+    return 3
+
+
+print old_func()
+
+
+op : 4
+
+---------------
+
+
+## deque:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

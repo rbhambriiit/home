@@ -1,0 +1,323 @@
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pip install pylint
+Collecting pylint
+  Downloading pylint-1.7.1-py2.py3-none-any.whl (641kB)
+    100% |████████████████████████████████| 645kB 517kB/s 
+Collecting astroid>=1.5.1 (from pylint)
+  Downloading astroid-1.5.2-py2.py3-none-any.whl (269kB)
+    100% |████████████████████████████████| 276kB 568kB/s 
+Requirement already satisfied (use --upgrade to upgrade): singledispatch; python_version < "3.4" in /Users/rahulbhambri/work/venv/lib/python2.7/site-packages (from pylint)
+Collecting mccabe (from pylint)
+  Downloading mccabe-0.6.1-py2.py3-none-any.whl
+Collecting backports.functools-lru-cache; python_version == "2.7" (from pylint)
+  Downloading backports.functools_lru_cache-1.4-py2.py3-none-any.whl
+Requirement already satisfied (use --upgrade to upgrade): six in /Users/rahulbhambri/work/venv/lib/python2.7/site-packages (from pylint)
+Collecting isort>=4.2.5 (from pylint)
+  Downloading isort-4.2.5-py2.py3-none-any.whl (40kB)
+    100% |████████████████████████████████| 40kB 806kB/s 
+Requirement already satisfied (use --upgrade to upgrade): configparser; python_version == "2.7" in /Users/rahulbhambri/work/venv/lib/python2.7/site-packages (from pylint)
+Requirement already satisfied (use --upgrade to upgrade): enum34; python_version < "3.4" in /Users/rahulbhambri/work/venv/lib/python2.7/site-packages (from astroid>=1.5.1->pylint)
+Collecting lazy-object-proxy (from astroid>=1.5.1->pylint)
+  Downloading lazy-object-proxy-1.3.1.tar.gz
+Collecting wrapt (from astroid>=1.5.1->pylint)
+  Downloading wrapt-1.10.10.tar.gz
+Building wheels for collected packages: lazy-object-proxy, wrapt
+  Running setup.py bdist_wheel for lazy-object-proxy ... done
+  Stored in directory: /Users/rahulbhambri/Library/Caches/pip/wheels/c7/08/02/013ac2109ffede05b4fe76c687c37419b5c67a31a2ff1118cc
+  Running setup.py bdist_wheel for wrapt ... done
+  Stored in directory: /Users/rahulbhambri/Library/Caches/pip/wheels/22/a5/9f/ca577d0e7b917b681fdbb7b36a41a8a9ae76fb7fec146438dc
+Successfully built lazy-object-proxy wrapt
+Installing collected packages: lazy-object-proxy, backports.functools-lru-cache, wrapt, astroid, mccabe, isort, pylint
+Successfully installed astroid-1.5.2 backports.functools-lru-cache-1.4 isort-4.2.5 lazy-object-proxy-1.3.1 mccabe-0.6.1 pylint-1.7.1 wrapt-1.10.10
+You are using pip version 8.1.2, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ ls
+bracket_balance.py      decorators.py           fibonacci.py            max of list.py
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ which pylint
+/Users/rahulbhambri/work/venv/bin/pylint
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C: 18, 0: Exactly one space required after comma
+        x,y = y,x+y
+         ^ (bad-whitespace)
+C: 18, 0: Exactly one space required after comma
+        x,y = y,x+y
+               ^ (bad-whitespace)
+C: 22, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  3, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  3, 0: Missing function docstring (missing-docstring)
+C:  4, 4: Invalid variable name "x" (invalid-name)
+C:  5, 4: Invalid variable name "y" (invalid-name)
+C:  8, 8: Invalid variable name "t" (invalid-name)
+C:  9, 8: Invalid variable name "y" (invalid-name)
+C: 10, 8: Invalid variable name "x" (invalid-name)
+W:  6, 8: Unused variable 'i' (unused-variable)
+W: 13, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C: 13, 0: Invalid argument name "n" (invalid-name)
+C: 13, 0: Missing function docstring (missing-docstring)
+C: 14, 4: Invalid variable name "x" (invalid-name)
+C: 15, 4: Invalid variable name "y" (invalid-name)
+C: 18, 8: Invalid variable name "x" (invalid-name)
+C: 18,10: Invalid variable name "y" (invalid-name)
+W: 16, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid constant name "n" (invalid-name)
+
+------------------------------------
+Your code has been rated at -3.75/10
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C: 22, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  3, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  3, 0: Missing function docstring (missing-docstring)
+C:  4, 4: Invalid variable name "x" (invalid-name)
+C:  5, 4: Invalid variable name "y" (invalid-name)
+C:  8, 8: Invalid variable name "t" (invalid-name)
+C:  9, 8: Invalid variable name "y" (invalid-name)
+C: 10, 8: Invalid variable name "x" (invalid-name)
+W:  6, 8: Unused variable 'i' (unused-variable)
+W: 13, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C: 13, 0: Invalid argument name "n" (invalid-name)
+C: 13, 0: Missing function docstring (missing-docstring)
+C: 14, 4: Invalid variable name "x" (invalid-name)
+C: 15, 4: Invalid variable name "y" (invalid-name)
+C: 18, 8: Invalid variable name "x" (invalid-name)
+C: 18,11: Invalid variable name "y" (invalid-name)
+W: 16, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid constant name "n" (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at -2.50/10 (previous run: -3.75/10, +1.25)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  3, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  3, 0: Missing function docstring (missing-docstring)
+C:  4, 4: Invalid variable name "x" (invalid-name)
+C:  5, 4: Invalid variable name "y" (invalid-name)
+C:  8, 8: Invalid variable name "t" (invalid-name)
+C:  9, 8: Invalid variable name "y" (invalid-name)
+C: 10, 8: Invalid variable name "x" (invalid-name)
+W:  6, 8: Unused variable 'i' (unused-variable)
+W: 13, 9: Redefining name 'n' from outer scope (line 20) (redefined-outer-name)
+C: 13, 0: Invalid argument name "n" (invalid-name)
+C: 13, 0: Missing function docstring (missing-docstring)
+C: 14, 4: Invalid variable name "x" (invalid-name)
+C: 15, 4: Invalid variable name "y" (invalid-name)
+C: 18, 8: Invalid variable name "x" (invalid-name)
+C: 18,11: Invalid variable name "y" (invalid-name)
+W: 16, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid constant name "n" (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at -1.88/10 (previous run: -2.50/10, +0.62)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  3, 9: Redefining name 'n' from outer scope (line 21) (redefined-outer-name)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  3, 0: Missing function docstring (missing-docstring)
+C:  4, 4: Invalid variable name "x" (invalid-name)
+C:  5, 4: Invalid variable name "y" (invalid-name)
+C:  8, 8: Invalid variable name "t" (invalid-name)
+C:  9, 8: Invalid variable name "y" (invalid-name)
+C: 10, 8: Invalid variable name "x" (invalid-name)
+W:  6, 8: Unused variable 'i' (unused-variable)
+W: 13, 9: Redefining name 'n' from outer scope (line 21) (redefined-outer-name)
+C: 13, 0: Invalid argument name "n" (invalid-name)
+C: 13, 0: Missing function docstring (missing-docstring)
+C: 14, 4: Invalid variable name "x" (invalid-name)
+C: 15, 4: Invalid variable name "y" (invalid-name)
+C: 18, 8: Invalid variable name "x" (invalid-name)
+C: 18,11: Invalid variable name "y" (invalid-name)
+W: 16, 8: Unused variable 'i' (unused-variable)
+C: 21, 4: Invalid constant name "n" (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at -1.18/10 (previous run: -1.88/10, +0.70)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  3, 0: Missing function docstring (missing-docstring)
+C:  4, 4: Invalid variable name "x" (invalid-name)
+C:  5, 4: Invalid variable name "y" (invalid-name)
+C:  8, 8: Invalid variable name "t" (invalid-name)
+C:  9, 8: Invalid variable name "y" (invalid-name)
+C: 10, 8: Invalid variable name "x" (invalid-name)
+W:  6, 8: Unused variable 'i' (unused-variable)
+C: 13, 0: Invalid argument name "n" (invalid-name)
+C: 13, 0: Missing function docstring (missing-docstring)
+C: 14, 4: Invalid variable name "x" (invalid-name)
+C: 15, 4: Invalid variable name "y" (invalid-name)
+C: 18, 8: Invalid variable name "x" (invalid-name)
+C: 18,11: Invalid variable name "y" (invalid-name)
+W: 16, 8: Unused variable 'i' (unused-variable)
+
+-------------------------------------------------------------------
+Your code has been rated at 0.59/10 (previous run: -1.18/10, +1.76)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  3, 0: Invalid argument name "n" (invalid-name)
+C:  9, 4: Invalid variable name "x" (invalid-name)
+C: 10, 4: Invalid variable name "y" (invalid-name)
+C: 13, 8: Invalid variable name "t" (invalid-name)
+C: 14, 8: Invalid variable name "y" (invalid-name)
+C: 15, 8: Invalid variable name "x" (invalid-name)
+W: 11, 8: Unused variable 'i' (unused-variable)
+C: 18, 0: Invalid argument name "n" (invalid-name)
+C: 24, 4: Invalid variable name "x" (invalid-name)
+C: 25, 4: Invalid variable name "y" (invalid-name)
+C: 28, 8: Invalid variable name "x" (invalid-name)
+C: 28,11: Invalid variable name "y" (invalid-name)
+W: 26, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 1.76/10 (previous run: 0.59/10, +1.18)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  5, 0: Invalid argument name "n" (invalid-name)
+C: 11, 4: Invalid variable name "x" (invalid-name)
+C: 12, 4: Invalid variable name "y" (invalid-name)
+C: 15, 8: Invalid variable name "t" (invalid-name)
+C: 16, 8: Invalid variable name "y" (invalid-name)
+C: 17, 8: Invalid variable name "x" (invalid-name)
+W: 13, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid argument name "n" (invalid-name)
+C: 26, 4: Invalid variable name "x" (invalid-name)
+C: 27, 4: Invalid variable name "y" (invalid-name)
+C: 30, 8: Invalid variable name "x" (invalid-name)
+C: 30,11: Invalid variable name "y" (invalid-name)
+W: 28, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 2.35/10 (previous run: 1.76/10, +0.59)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  5, 0: Invalid argument name "n" (invalid-name)
+W: 13, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid argument name "n" (invalid-name)
+C: 26, 4: Invalid variable name "x" (invalid-name)
+C: 27, 4: Invalid variable name "y" (invalid-name)
+C: 30, 8: Invalid variable name "x" (invalid-name)
+C: 30,11: Invalid variable name "y" (invalid-name)
+W: 28, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 5.29/10 (previous run: 2.35/10, +2.94)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+C:  5, 0: Invalid argument name "n" (invalid-name)
+W: 13, 8: Unused variable 'i' (unused-variable)
+C: 20, 0: Invalid argument name "n" (invalid-name)
+W: 28, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 7.65/10 (previous run: 5.29/10, +2.35)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+W: 13, 8: Unused variable 'i' (unused-variable)
+W: 28, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 8.82/10 (previous run: 7.65/10, +1.18)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+W: 13, 8: Unused variable 'i' (unused-variable)
+W: 28, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 8.82/10 (previous run: 8.82/10, +0.00)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+************* Module fibonacci
+W: 13, 8: Unused variable 'i' (unused-variable)
+
+------------------------------------------------------------------
+Your code has been rated at 9.41/10 (previous run: 8.82/10, +0.59)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ pylint fibonacci.py 
+No config file found, using default configuration
+
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 9.41/10, +0.59)
+
+(venv) Bams-MacBook-Pro:python executions_rahul rahulbhambri$ 
+
+
+
+# latest code:
+
+"""
+This module handles various versions of fibonnaci
+"""
+
+def fib1(num):
+    """
+    naive way of doing fibonacci: update one state at a time
+    :param num: input
+    :return: fibonacci sequence
+    """
+    first = 0
+    second = 1
+    for _ in range(num):
+        print first
+        tmp = second
+        second = first+second
+        first = tmp
+
+
+def fib2(num):
+    """
+    update multiple states together
+    :param num: input
+    :return: fibonacci sequence
+    """
+    first = 0
+    second = 1
+    for _ in range(num):
+        print first
+        first, second = second, first+second
+
+if __name__ == '__main__':
+    N = 5
+    # fib1(N)
+    fib2(N)
+
+
+
+
+
