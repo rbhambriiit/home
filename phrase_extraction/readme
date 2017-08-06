@@ -1,0 +1,219 @@
+=================================
+
+THE TASK: Phrase detection
+
+Given a set of sentences and labelled phrases for training data, build a model for extraction of these phrases.
+
+eg:
+Sentence: Meet doctor today for diva
+Phrase: Meet doctor
+
+Phrases are set of consecutive words in text - referred as n-grams with bigram and trigram
+ being the common set of word sequences of 2 and 3 words respectively. We need to find these patterns of n-grams which
+ determine that the phrase built using these n-grams are meaningful.
+
+=================================
+APPROACH:
+
+### Part 1: NLP
+From Natural language perspective, sentences comprise of phrase chunks: Noun phrase, verb phrase etc.
+Technically these phrases can be extracted by using approaches such as Noun Phrase Chunking as dicsussed in the following links:
+
+http://www.nltk.org/book/ch07.html
+http://www.nltk.org/howto/chunk.html
+http://www.aclweb.org/anthology/C10-1065
+
+We are interested in the fact that the Grammar used in these NLP tasks comes with a structure.
+Eg: a noun/verb connected with another noun/adjective/verb using some determiner/connecting words usually form a phrase.
+The structure of this phrase is determined by their part-of-speech tagging sequence. We are interested in this sequence.
+
+At this stage, you might like to refer to 'noun_phrase_extractor.py' to get more examples of these phrases.
+A general grammar rule is defined to understand the meaning of each strucutre defined (eg: noun-phrase).
+Each of these structures form a subtree which needs to be parsed and analysed.
+
+BUT: The problem is that there can be a lot of grammatical rules - depending upon the context at hand, language being used,
+deal with stop-words in the domain and so on. These rules can not be tuned manually beyond a stage and thus require
+learning algorithms to find these patterns.
+
+
+
+### Part 2: Machine learning
+At this stage we delve deeper in finding the patterns in these sentences (refer to 'get_patterns.py'):
+We pick one example from the training data with the input sentence and expected label for phrase:
+
+sentence = 'remind me on 4th on second month to do hair spa time will be 6Pm.'
+phrase = 'do hair spa time'
+
+Since the phrase is a 4-gram we are considering all possible 4-grams with their pos-tags sequence (referred as 'pos_sequence').
+We are looking at this as a classification task, where the pos_sequence for the phrase matching the target label
+is a good grammar structure (phrase activated with a label '1') and all the other 4-grams are labelled as 0.
+
+({'pos_sequence': 'NN PRP IN JJ', 'size': 4}, 0)
+({'pos_sequence': 'PRP IN JJ IN', 'size': 4}, 0)
+({'pos_sequence': 'IN JJ IN JJ', 'size': 4}, 0)
+({'pos_sequence': 'JJ IN JJ NN', 'size': 4}, 0)
+({'pos_sequence': 'IN JJ NN TO', 'size': 4}, 0)
+({'pos_sequence': 'JJ NN TO VB', 'size': 4}, 0)
+({'pos_sequence': 'NN TO VB JJ', 'size': 4}, 0)
+({'pos_sequence': 'TO VB JJ NN', 'size': 4}, 0)
+({'pos_sequence': 'VB JJ NN NN', 'size': 4}, 1)
+({'pos_sequence': 'JJ NN NN MD', 'size': 4}, 0)
+({'pos_sequence': 'NN NN MD VB', 'size': 4}, 0)
+({'pos_sequence': 'NN MD VB CD', 'size': 4}, 0)
+({'pos_sequence': 'MD VB CD .', 'size': 4}, 0)
+
+
+Notice that we are starting to build positive and negative training data for a binary classification problem.
+As we traverse all the possible sentences and their labels, we have covered a lot of pos-sequences and different sizes.
+We also store the size of n-grams in case it turns out as a useful feature later.
+Also note that we are not allowing any stop-words at this stage, since many of the target labels contain words like 'to', 'for'
+in final phrases. (checkout '0_all_about_data.ipynb' to get a top-view of the training data)
+
+
+Once we have the features we start training models. More details around this stage will follow in the next section.
+
+Finally after building these models, we observe the grammatical patterns observed by the classifier.
+(read: 'model_analysis.ipynb')
+
+We find interesting patterns like:
+
+> pos_sequence = 'VB PRP$ NN' occurs 115X more with a label of '1' than a '0' - which means it is a strong pattern found across
+our training data labels phrases.
+> Similarly pattern for pos_sequence = 'DT NN IN' does not lead to a meaningful phrase.
+
+
+
+
+=================================
+ALGORITHM:
+
+----------------------------------
+Part 1: Pre-processing:
+
+Before starting the learning part, we split up the data into train and test data.
+
+# read data files
+data_file = 'Assignment_Dataset/train_data.tsv'
+df = pd.read_csv(data_file, error_bad_lines=False, delimiter='\t’)
+
+# data size
+df.shape
+(9749, 2)
+
+# data already split up as 80-20 train:test
+from sklearn.model_selection import train_test_split
+train, test = train_test_split(df, test_size = 0.2)
+
+----------------------------------
+
+
+Part 2: Model training:
+Read 'training.py'
+
+As discussed above, once the phrase pos sequences are available with their labels, we fed data to a classifier.
+For classification tasks over sequence of text data - Naive bayes comes as the first thought to me.
+The classifier is also pickled for analysis and later usage.
+
+    save_classifier = open("naivebayes.pickle", "wb")
+    pickle.dump(classifier, save_classifier)
+    save_classifier.close()
+
+----------------------------------
+
+Part 3: Model analysis:
+Analysing the most important features.
+
+> classifier.show_most_informative_features(50)
+
+
+----------------------------------
+
+Part 4: Phrase generation for test data:
+Read 'testing.py'
+
+Given a piece of text, form all possible phrase patterns (considering all possible n-grams)
+Whenever the classifier predicts a 1 to find a meaningful phrase, it is preserved.
+In this version we preserve the phrase with the max number of words (max TF: term - frequency)
+(Not able to get prediction confidence using Naive bayes.)
+
+----------------------------------
+
+Part 5: Work over evaluation data
+(evaluation.py)
+
+Apply phrase generation approach discussed in the previous step over all data in evaluation dataset.
+Later store results as csv.
+
+----------------------------------
+Part 6: Analysis:
+(accuracy.py):
+Runs over all training and test data samples - creates data files with label expected vs. label observed
+and the percentage hit correctly.
+
+This model gives ~55% accuracy over training data and 41% over test data.
+
+Train:
+correct: 4262
+total: 7743
+accuracy: 0.55
+
+
+=================================
+
+
+
+CHRONOLOGICAL CODE FLOW:
+
+>'algo_core/noun_phrase_extractor.py':
+>> Basic building block for grammatical structure analysis in sentences.
+
+
+> 'algo_core/get_patterns.py':
+>> Getting Part-of-speech tagging based grammatical structures.
+>> Start to get classification features and target labels (0: not a good phrase, 1: good phrase)
+
+
+> 'data/0_all_about_data.ipynb':
+>> top-level view of the data provided
+
+
+>'algo_core/training.py'
+>> Model training phase - also save the model to models folder.
+
+
+> 'models/model_analysis.ipynb':
+>> Understanding our classifier features better.
+
+> 'algo_core/testing.py':
+>> Analysing all phrases for a test sample and checking the quality predicted by classifier.
+>> TO BE USED FOR ALL SORTS OF UNIT TESTING
+>> GENERATES ALL PHRASES
+
+> 'algo_core/evaluation.py'
+>> Working over evaluation data
+
+> 'algo_core/accuracy.py'
+>> Get accuracy measures.
+
+
+=================================
+
+FURTHER THOUGHTS:
+
+This model seems like a decent model to start with. But needs to improve by adding more features.
+
+Pros:
+Classifier is simple and fast.
+Depends on the structure of POS-tags and not on the words. Hence should work fine over unseen words also.
+
+Cons:
+If POS tags are not available properly, eg: sentence is not constructed properly - we are bound to face issues.
+
+Can also try collocation strengths eg: PMI for bigram/trigram as an additional feature besides the pos-sequence
+
+case-sensitivity is not preserved yet: everything was converted to lower case. to get the final phrase we need to get the exact phrase back
+from the lowered case phrases. Anyways trivial task...
+
+
+=================================
+
