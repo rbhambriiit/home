@@ -1,5 +1,21 @@
 import networkx as nx
 
+'''
+Problem description: 
+2 players with 10 Rs each play a toss based game. Coin is balanced and thus both have same probability to win.
+The loser at each stage gives his 5 Rs to the other person. Find the probability of each player winning -
+ eg first player gets 20 Rs at the end.
+
+
+Solution:
+All possible states can be thought of (total 5 states)
+and represented as directed graphs nodes with edges as per the markov transition based on the condition given in question.
+The point is markov stable probabilities should be same as pagerank in the graph obtained.
+
+Also see:
+https://www.math.upenn.edu/~kazdan/312F12/JJ/MarkovChains/markov_google.pdf
+'''
+
 if __name__ == '__main__':
     G = nx.DiGraph()
 
@@ -18,6 +34,6 @@ if __name__ == '__main__':
     # print G.edges()
 
     pagerank = nx.pagerank(G)
-    print pagerank
+    print 'pagerank scores:', pagerank
 
     print 'probability of state 20 is:', pagerank[20]
