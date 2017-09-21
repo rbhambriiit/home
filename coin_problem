@@ -1,0 +1,23 @@
+import networkx as nx
+
+if __name__ == '__main__':
+    G = nx.DiGraph()
+
+    edges = [
+        (0, 5),
+        (5, 0),
+        (5, 10),
+        (10, 5),
+        (10, 15),
+        (15, 10),
+        (15, 20),
+        (20, 15)
+    ]
+
+    G.add_edges_from(edges)
+    # print G.edges()
+
+    pagerank = nx.pagerank(G)
+    print pagerank
+
+    print 'probability of state 20 is:', pagerank[20]
