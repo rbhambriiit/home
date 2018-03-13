@@ -1,0 +1,21 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import math
+
+x = [15, 12, 8, 8, 7, 7, 7, 6, 5, 3]
+y = [10, 25, 17, 11, 13, 17, 20, 13, 9, 15]
+
+n = len(x)
+sum_xy = sum(a*b for a,b in zip(x, y))
+sum_xx = sum(a**2 for a in x)
+sum_yy = sum(b**2 for b in y)
+sum_x = sum(x)
+sum_y = sum(y)
+
+r_num = (n * sum_xy) - (sum_x * sum_y)
+r_den = ((n * sum_xx) - (sum_x ** 2)) * ((n * sum_yy) - (sum_y ** 2))
+r_den = math.sqrt(r_den)
+
+r = round(r_num / float(r_den), 3)
+print r
+
