@@ -1,0 +1,45 @@
+#!/bin/python
+
+import sys
+
+def find_trigram(input_list):
+  return zip(input_list, input_list[1:], input_list[2:])
+
+s = sys.stdin.read().lower()
+# s = raw_input().strip().lower()
+s = s.replace('\n', ' ')
+s = s.replace('  ', ' ')
+
+sentences = s.split('.')
+# print len(sentences)
+
+global_id = 1000000
+score_dict = {}
+
+for sentence in sentences:
+    sentence = sentence.lstrip(' ')
+    # print sentence
+    if sentence:
+        tokens = sentence.split()
+            
+        trigrams = find_trigram(tokens)
+        
+        for trigram in trigrams:
+            if trigram in score_dict:
+                score_dict[trigram][0] += 1
+            else:
+                score_dict[trigram] = [1, global_id]
+                global_id -= 1
+        
+        sorted_list = sorted(score_dict.items(), key=lambda x: x[1], reverse=True)[:5]
+        # print '\n========\n', sentence
+        # print sorted_list
+
+sorted_list = sorted(score_dict.items(), key=lambda x: x[1], reverse=True)
+# print sorted_list
+
+trigram = sorted_list[0][0]
+print ' '.join(trigram)
+        
+        
+    
