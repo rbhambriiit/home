@@ -1,0 +1,61 @@
+#!/bin/python
+
+def locate(grid, bot):
+    for x, space in enumerate(grid):
+        for y, point in enumerate(space):
+            # print point
+            if point == bot:
+                return [x, y]
+            
+            
+def traverse(bot_coordinates, princess_coordinates):
+    princess_y, princess_x  = princess_coordinates
+    # bot travels. princess is static!
+    bot_y, bot_x  = bot_coordinates
+    
+    while bot_x != princess_x:
+        # should go left??
+        if bot_x > princess_x:
+            print 'LEFT'
+            bot_x -= 1
+            continue
+        elif bot_x < princess_x:
+            print 'RIGHT'
+            bot_x += 1
+            continue
+        
+    while bot_y != princess_y:
+        # should go left??
+        if bot_y > princess_y:
+            print 'UP'
+            bot_y -= 1
+            continue
+        elif bot_y < princess_y:
+            print 'DOWN'
+            bot_y += 1
+            continue
+        
+    
+def displayPathtoPrincess(n,grid):
+    #print all the moves here
+    # print n ,grid
+    
+    # find bot
+    bot = 'm'
+    bot_coordinates = locate(grid, bot)
+    # print 'bot is at:', bot_coordinates
+    
+    princess = 'p'
+    princess_coordinates = locate(grid, princess)
+    # print 'princess is at:', princess_coordinates
+    
+    traverse(bot_coordinates, princess_coordinates)
+    
+    
+m = input()
+
+grid = []
+for i in xrange(0, m):
+    grid.append(raw_input().strip())
+
+displayPathtoPrincess(m,grid)
