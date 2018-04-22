@@ -1,0 +1,125 @@
+# start from v1
+# score 0.91
+# https://www.hackerrank.com/challenges/stack-exchange-question-classifier/submissions/code/71328518
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+## need to train model.
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.cross_validation import train_test_split
+from sklearn.utils import shuffle
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import confusion_matrix
+import numpy as np
+from sklearn.metrics import precision_recall_fscore_support
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+    
+
+def parse_training_file():
+    my_list = []
+
+    for line in open('training.json', 'r'):
+        line = eval(line)
+
+        if isinstance(line, dict):
+            # print line, type(line)
+
+            row = (line['question'] + ' ' + line["excerpt"][:500], line['topic'])
+            my_list.append(row)
+
+
+    # print my_list
+    
+    df = pd.DataFrame(my_list, columns=['text', 'topic'])
+    return df
+    
+    
+def train(df):
+    # shuffle df
+    df = shuffle(df)
+    
+    
+    df_x = df["text"]
+    df_y = df["topic"]
+    
+    cv = TfidfVectorizer(ngram_range=(1, 2), stop_words='english', max_df=0.5, min_df=1)
+    x_train, x_test, y_train, y_test = train_test_split(df_x, df_y, test_size=0.25, random_state=4)
+    
+    x_traincv=cv.fit_transform(x_train)
+    # print cv.get_feature_names()
+    
+    # x_testcv = cv.transform(x_test)
+    
+    # mnb = MultinomialNB()
+    # mnb.fit(x_traincv, y_train)
+    
+    logreg = LogisticRegression(C=9.0)
+    logreg.fit(x_traincv, y_train)
+    mnb = logreg
+    
+    
+    # find_most_important_features(cv, mnb)
+
+    x_testcv = cv.transform(x_test)
+    predictions = mnb.predict(x_testcv)
+    
+    # actual = np.array(y_test)
+    # cm = confusion_matrix(actual, predictions)
+    # print 'confusion matrix:\n', cm
+    # print precision_recall_fscore_support(actual, predictions, average='micro')
+    
+    return mnb, cv
+        
+    
+def find_most_important_features(cv, model):
+    # supported only for linear kernels
+    feature_names = cv.get_feature_names()
+    
+    # in this case we have 10 classes..
+    for i in xrange(10):
+        coefs_with_fns = sorted(zip(model.coef_[i], feature_names))
+        n = 20
+        top = zip(coefs_with_fns[:n], coefs_with_fns[:-(n+1):-1])
+
+        print('\n==========\nMost informative features for class', model.classes_[i], '\n')
+        for (coef_1, fn_1), (coef_2, fn_2) in top:
+            print(coef_1, fn_1, '   ', coef_2, fn_2)
+    
+
+df = parse_training_file()  
+
+# print df.head()
+# print df.shape
+# print df.describe()
+
+
+model, cv = train(df)
+
+
+# model is ready. read input and predict output
+
+n = int(raw_input())
+# print 'n:', n
+
+# n = 10
+
+questions = []
+for _ in xrange(n):
+    my_json = eval(raw_input())
+    
+    questions.append(my_json['question'] + ' ' + my_json["excerpt"][:500])
+
+
+# print questions
+
+x_testcv = cv.transform(questions)
+predictions = model.predict(x_testcv)
+
+for p in predictions:
+    print p
+
+
