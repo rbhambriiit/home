@@ -93,7 +93,7 @@ def train_data_to_json(train_data, nlp, output_json='train.json'):
     return True
 
 
-nlp = spacy.load('en')
+nlp = spacy.load('en', disable = ["ner"])
 
 train_data = [
 (u"Uber blew through $1 million a week", {'entities':[(0, 4, 'ORG')]}),
