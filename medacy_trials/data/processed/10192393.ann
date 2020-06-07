@@ -1,0 +1,14 @@
+T1	DiseaseClass	15	26	skin tumour
+T2	DiseaseClass	443	449	cancer
+T3	DiseaseClass	483	496	colon cancers
+T4	SpecificDisease	539	565	adenomatous polyposis coli
+T5	SpecificDisease	567	570	APC
+T6	CompositeMention	670	698	colon and some other cancers
+T7	DiseaseClass	855	867	skin tumours
+T8	SpecificDisease	879	893	pilomatricomas
+T9	SpecificDisease	1021	1035	pilomatricomas
+T10	DiseaseClass	1210	1221	skin tumour
+T11	Modifier	1262	1268	tumour
+T12	SpecificDisease	1312	1326	pilomatricomas
+T13	DiseaseClass	1385	1392	tumours
+T14	DiseaseClass	1615	1622	tumours
